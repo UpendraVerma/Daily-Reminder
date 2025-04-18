@@ -40,19 +40,19 @@ class DBHelper {
   }
 
   // insert into the reminder table
-  Future<bool> addReminder({
+  Future<int> addReminder({
     required String title,
     required String desc,
     required String time,
   }) async {
     var database = await getDB();
 
-    int rowEffected = await database.insert(TABLE_REMINDER, {
+    int insertedId = await database.insert(TABLE_REMINDER, {
       COLUMN_REMINDER_TITLE: title,
       COLUMN_REMINDER_DESC: desc,
       COLUMN_REMINDER_TIME: time,
     });
-    return rowEffected > 0;
+    return insertedId;
   }
 
   // fetch the reminder data
@@ -95,6 +95,13 @@ class DBHelper {
       where: '$COLUMN_REMINDER_ID = ?',
       whereArgs: [id],
     );
+    return rowEffected > 0;
+  }
+
+  // delete all the reminder
+  Future<bool> deleteAllReminder() async {
+    var database = await getDB();
+    int rowEffected = await database.delete(TABLE_REMINDER);
     return rowEffected > 0;
   }
 }

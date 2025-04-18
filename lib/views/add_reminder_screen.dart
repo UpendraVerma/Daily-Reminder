@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../constants/app_colors.dart';
+import '../services/notification_service.dart';
 
 class AddReminderScreen extends StatefulWidget {
   final bool isForUpdate;
@@ -59,19 +60,32 @@ class _AddReminderScreenState extends State<AddReminderScreen> {
         desc: description,
         time: _selectedTime!.format(context),
       );
-      if (isDone) {
-        Navigator.pop(context, true);
-      }
-    } else {
-      bool isDone = await DBHelper.sharedInstance.addReminder(
+
+      NotificationService.sharedInstance.cancelPushNotification(widget.reminderTaskData!.id);
+      NotificationService.sharedInstance.scheduleDailyNotification(
+        id: widget.reminderTaskData!.id,
         title: title,
-        desc: description,
-        time: _selectedTime!.format(context),
+        body: description,
+        selectedTime: _selectedTime!,
       );
 
       if (isDone) {
         Navigator.pop(context, true);
       }
+    } else {
+      int insertedId = await DBHelper.sharedInstance.addReminder(
+        title: title,
+        desc: description,
+        time: _selectedTime!.format(context),
+      );
+
+      NotificationService.sharedInstance.scheduleDailyNotification(
+          id: insertedId,
+          title: title,
+          body: description,
+          selectedTime: _selectedTime!,
+      );
+      Navigator.pop(context, true);
     }
   }
 
