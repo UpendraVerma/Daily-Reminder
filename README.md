@@ -1,3 +1,4 @@
+
 # 🕑 Daily Reminder
 
 A simple Flutter app to manage your daily reminders. This app lets you add, edit, and delete reminder tasks — all stored locally using SQLite. It’s lightweight, fast, and works completely offline.
@@ -12,6 +13,7 @@ A simple Flutter app to manage your daily reminders. This app lets you add, edit
 - 🗑️ Delete reminders  
 - 💾 Data stored locally using SQLite  
 - 🎨 Clean and minimal UI  
+- 🔔 Receive notifications for your reminders  
 
 ---
 
@@ -25,6 +27,7 @@ This project helped me learn and apply the following:
 - Navigating between screens using **Navigator**  
 - Managing state with `setState()` in **StatefulWidget**  
 - Building a clean and user-friendly UI with **Material Design**  
+- Setting up and handling **local notifications** in Flutter
 
 ---
 
@@ -35,6 +38,7 @@ This project helped me learn and apply the following:
 - **SQLite** – Local database for persistent storage  
 - **sqflite** – SQLite plugin for Flutter  
 - **path** – To manage file paths for database  
+- **flutter_local_notifications** – Plugin for handling local notifications
 
 ---
 
@@ -80,15 +84,16 @@ dependencies:
   path_provider: ^2.1.5
   google_fonts: ^6.2.1
   path: ^1.8.3
+  flutter_local_notifications: ^9.0.0
 ```
 
 ---
 
 ## 📸 Screenshots
 
-| Reminder List | Add Reminder |
-|---------------|--------------|
-| ![Reminder List](screenshots/reminder_list.png) | ![Add Reminder](screenshots/add_reminder.png) |
+| Reminder List | Add Reminder | Notification |
+|---------------|--------------|-------------|
+| ![Reminder List](screenshots/reminder_list.png) | ![Add Reminder](screenshots/add_reminder.png) | ![Notification](screenshots/reminder_push_notification.png) |
 
 ---
 
@@ -101,4 +106,5 @@ This project is open source and available under the [MIT License](LICENSE).
 ## 🙌 Acknowledgments
 
 - Flutter team for the amazing framework  
-- `sqflite` plugin contributors
+- `sqflite` plugin contributors  
+- `flutter_local_notifications` plugin contributors
